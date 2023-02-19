@@ -12,19 +12,6 @@ const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
 const expectedJson = readFile('expectedJSON.txt');
 
-const data1 = {
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false
-  }
-
-const data2 = {
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
-  }
-
 test('gendiff', () => {
   const filepath1 = getFixturePath(`file1.json`);
   const filepath2 = getFixturePath(`file2.json`);
