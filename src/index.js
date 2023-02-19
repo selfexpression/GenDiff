@@ -3,12 +3,12 @@ import { cwd } from 'process';
 import path from 'path';
 import _ from 'lodash';
 
-const getRawData = (filePath) => {
-  const fullPath = path.resolve(cwd(), filePath);
+const getRawData = (filepath) => {
+  const fullPath = path.resolve(cwd(), filepath);
   return readFileSync(fullPath, 'utf-8');
 };
 
-const genDiff = (data1, data2) => {
+const getDiff = (data1, data2) => {
   const unionKeys = _.union(_.keys(data1), _.keys(data2));
 
   const result = _.sortBy(unionKeys).reduce((acc, key) => {
@@ -40,5 +40,5 @@ export default (filePath1, filePath2) => {
   const data2 = getRawData(filePath2);
   const dataParse1 = JSON.parse(data1);
   const dataParse2 = JSON.parse(data2);
-  return genDiff(dataParse1, dataParse2);
+  return getDiff(dataParse1, dataParse2);
 };
