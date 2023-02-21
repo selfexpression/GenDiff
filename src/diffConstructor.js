@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import formatter from './formatters/index.js';
 
 export default (data1, data2) => {
   const unionKeys = _.union(_.keys(data1), _.keys(data2));
