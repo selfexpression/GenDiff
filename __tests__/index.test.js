@@ -19,5 +19,5 @@ test('gendiff', () => {
   const filePathYAML1 = getFixturePath('file1.yml');
   const filePathYAML2 = getFixturePath('file2.yml');
   expect(genDiff(filePathJSON1, filePathJSON2)).toBe(expectedJson);
-  expect(genDiff(filePathYAML1, filePathYAML2)).toBe(expectedYaml);
+  expect(genDiff(filePathYAML1, filePathYAML2)).toEqual(expectedYaml);
 });
