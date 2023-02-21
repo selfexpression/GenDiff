@@ -1,13 +1,14 @@
 import yaml from 'js-yaml';
+import stylish from './formatters/stylish.js';
 
 const parse = (data, format) => {
   switch (format) {
     case '.json':
       return JSON.parse(data);
     case '.yml':
-      return yaml.load(data);
+      return stylish(yaml.load(data));
     case '.yaml':
-      return yaml.load(data);
+      return stylish(yaml.load(data));
     default:
       return null;
   }
