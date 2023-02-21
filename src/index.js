@@ -16,5 +16,5 @@ export default (filePath1, filePath2) => {
   const data2 = getRawData(filePath2);
   const dataParse1 = parse(data1, fileExtension1);
   const dataParse2 = parse(data2, fileExtension2);
-  return diffConstructor(dataParse1, dataParse2);
+  return (dataParse1, dataParse2);
 };
