@@ -3,6 +3,7 @@ import { cwd } from 'process';
 import path from 'path';
 import diffConstructor from './diffConstructor.js';
 import parse from './parsers.js';
+import stylish from './formatters/stylish.js';
 
 const getRawData = (filepath) => {
   const fullPath = path.resolve(cwd(), filepath);
@@ -16,5 +17,6 @@ export default (filePath1, filePath2) => {
   const data2 = getRawData(filePath2);
   const dataParse1 = parse(data1, fileExtension1);
   const dataParse2 = parse(data2, fileExtension2);
-  return (dataParse1, dataParse2);
+  const result = diffConstructor(dataParse1, dataParse2);
+  return stylish(result);
 };
