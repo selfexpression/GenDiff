@@ -18,6 +18,5 @@ export default (filePath1, filePath2, formatter = stylish) => {
   const dataParse1 = parse(data1, fileExtension1);
   const dataParse2 = parse(data2, fileExtension2);
   const result = diffConstructor(dataParse1, dataParse2);
-  console.log(formatter(result));
   return formatter(result);
 };
