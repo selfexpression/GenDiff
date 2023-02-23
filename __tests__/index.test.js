@@ -16,8 +16,8 @@ const expectedJson = readFile('expectedJson.txt');
 test('gendiff', () => {
   const filePathYAML1 = getFixturePath('file1.yml');
   const filePathYAML2 = getFixturePath('file2.yml');
-  const filePathJson1 = getFixturePath('file1.yml');
-  const filePathJson2 = getFixturePath('file2.yml');
+  const filePathJson1 = getFixturePath('file1.json');
+  const filePathJson2 = getFixturePath('file2.json');
   expect(genDiff(filePathYAML1, filePathYAML2)).toBe(expectedStylish);
   expect(genDiff(filePathJson1, filePathJson2)).toBe(expectedJson);
 });
