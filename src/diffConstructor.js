@@ -23,6 +23,7 @@ const diffConstructor = (data1, data2) => {
     }
     return { key, status: 'nested', children: diffConstructor(data1[key], data2[key]) };
   });
+
   return result;
 };
 
