@@ -32,22 +32,23 @@ const stylish = (data) => {
     const lines = Object
       .entries(currentValue)
       .map(([, value]) => {
-        let line;
-        if (value.status === 'added') {
-          line = `${indent}+ ${value.key}: ${stringify(value.value, depth + 1)}`;
-        } else if (value.status === 'nested') {
-          line = `${indent}  ${value.key}: ${iter(value.children, depth + 1)}`;
-        } else if (value.status === 'deleted') {
-          line = `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`;
-        } else if (value.status === 'unchanged') {
-          line = `${indent}  ${value.key}: ${stringify(value.value, depth + 1)}`;
-        } else if (value.status === 'changed') {
-          line = [
-            `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`,
-            `${indent}+ ${value.key}: ${stringify(value.value2, depth + 1)}`,
-          ].join('\n');
+        switch (value.status) {
+          case 'added':
+            return `${indent}+ ${value.key}: ${stringify(value.value, depth + 1)}`;
+          case 'nested':
+            return `${indent}  ${value.key}: ${iter(value.children, depth + 1)}`;
+          case 'deleted':
+            return `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`;
+          case 'unchanged':
+            return `${indent}  ${value.key}: ${stringify(value.value, depth + 1)}`;
+          case 'changed':
+            return [
+              `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`,
+              `${indent}+ ${value.key}: ${stringify(value.value2, depth + 1)}`,
+            ].join('\n');
+          default:
+            return null;
         }
-        return line;
       });
 
     return [
