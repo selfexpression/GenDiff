@@ -10,9 +10,11 @@ const getRawData = (filepath) => {
   return readFileSync(fullPath, 'utf-8');
 };
 
+const getExtention = (filepath) => path.extname(filepath);
+
 export default (filePath1, filePath2, formatName = 'stylish') => {
-  const fileExtension1 = path.extname(filePath1);
-  const fileExtension2 = path.extname(filePath2);
+  const fileExtension1 = getExtention(filePath1);
+  const fileExtension2 = getExtention(filePath2);
   const data1 = getRawData(filePath1);
   const data2 = getRawData(filePath2);
   const dataParse1 = parse(data1, fileExtension1);

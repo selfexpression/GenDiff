@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/selfexpression/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/selfexpression/frontend-project-46/actions)",
+  "description": "GenDiff - cli-app that compares two configuration files and shows a difference in one of three formats (stylish, plain, json).",
   "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/selfexpression/frontend-project-46.git"
   },
-  "author": "",
+  "author": "Selfexpression",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/selfexpression/frontend-project-46/issues"
