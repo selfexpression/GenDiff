@@ -16,13 +16,13 @@ const plain = (data) => {
     const output = entries.map(([, value]) => {
       const path = [...emptyString, value.key];
       const newPath = path.join('.');
-      switch (value.status) {
+      switch (value.type) {
         case 'added':
           return `Property '${newPath}' was added with value: ${correctValue(value.value)}`;
-        case 'deleted':
+        case 'removed':
           return `Property '${newPath}' was removed`;
-        case 'changed':
-          return `Property '${newPath}' was updated. From ${correctValue(value.value)} to ${correctValue(value.value2)}`;
+        case 'updated':
+          return `Property '${newPath}' was updated. From ${correctValue(value.from)} to ${correctValue(value.to)}`;
         case 'unchanged':
           return '';
         case 'nested':

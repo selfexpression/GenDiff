@@ -32,19 +32,19 @@ const stylish = (data) => {
     const lines = Object
       .entries(currentValue)
       .map(([, value]) => {
-        switch (value.status) {
+        switch (value.type) {
           case 'added':
             return `${indent}+ ${value.key}: ${stringify(value.value, depth + 1)}`;
           case 'nested':
             return `${indent}  ${value.key}: ${iter(value.children, depth + 1)}`;
-          case 'deleted':
+          case 'removed':
             return `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`;
           case 'unchanged':
             return `${indent}  ${value.key}: ${stringify(value.value, depth + 1)}`;
-          case 'changed':
+          case 'updated':
             return [
-              `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`,
-              `${indent}+ ${value.key}: ${stringify(value.value2, depth + 1)}`,
+              `${indent}- ${value.key}: ${stringify(value.from, depth + 1)}`,
+              `${indent}+ ${value.key}: ${stringify(value.to, depth + 1)}`,
             ].join('\n');
           default:
             return null;
