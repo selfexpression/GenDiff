@@ -26,10 +26,6 @@ const stringify = (data, depth = 1) => {
 
 const stylish = (data) => {
   const iter = (currentValue, depth = 1) => {
-    if (!_.isObject(currentValue)) {
-      return `${currentValue}`;
-    }
-
     const indent = getIndent(depth);
     const bracketIndent = getBracketIndent(depth);
 
