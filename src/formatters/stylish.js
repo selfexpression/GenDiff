@@ -14,14 +14,12 @@ const stringify = (data, depth = 1) => {
     }
 
     const indent = '    '.repeat(currentDepth);
+    const bracketIndent = getBracketIndent(currentDepth);
+
     const output = Object
       .entries(data)
       .map(([key, value]) => `${indent}${key}: ${stringify(value, currentDepth + 1)}`);
-    return [
-      '{',
-      ...output,
-      `${getBracketIndent(currentDepth)}}`,
-    ].join('\n');
+    return ['{', ...output, `${bracketIndent}}`].join('\n');
   };
   return iter(data, depth);
 };
@@ -32,33 +30,32 @@ const stylish = (data) => {
       return `${currentValue}`;
     }
 
+    const indent = getIndent(depth);
+    const bracketIndent = getBracketIndent(depth);
+
     const lines = Object
       .entries(currentValue)
       .map(([, value]) => {
         switch (value.type) {
           case 'added':
-            return `${getIndent(depth)}+ ${value.key}: ${stringify(value.value, depth + 1)}`;
+            return `${indent}+ ${value.key}: ${stringify(value.value, depth + 1)}`;
           case 'nested':
-            return `${getIndent(depth)}  ${value.key}: ${iter(value.children, depth + 1)}`;
+            return `${indent}  ${value.key}: ${iter(value.children, depth + 1)}`;
           case 'removed':
-            return `${getIndent(depth)}- ${value.key}: ${stringify(value.value, depth + 1)}`;
+            return `${indent}- ${value.key}: ${stringify(value.value, depth + 1)}`;
           case 'unchanged':
-            return `${getIndent(depth)}  ${value.key}: ${stringify(value.value, depth + 1)}`;
+            return `${indent}  ${value.key}: ${stringify(value.value, depth + 1)}`;
           case 'updated':
             return [
-              `${getIndent(depth)}- ${value.key}: ${stringify(value.from, depth + 1)}`,
-              `${getIndent(depth)}+ ${value.key}: ${stringify(value.to, depth + 1)}`,
+              `${indent}- ${value.key}: ${stringify(value.from, depth + 1)}`,
+              `${indent}+ ${value.key}: ${stringify(value.to, depth + 1)}`,
             ].join('\n');
           default:
-            return null;
+            throw new Error(`Unsupported node type (${value.type})!`);
         }
       });
 
-    return [
-      '{',
-      ...lines,
-      `${getBracketIndent(depth)}}`,
-    ].join('\n');
+    return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };
   return iter(data);
 };

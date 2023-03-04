@@ -2,8 +2,9 @@ import _ from 'lodash';
 
 const diffConstructor = (data1, data2) => {
   const unionKeys = _.union(_.keys(data1), _.keys(data2));
+  const sortKeys = _.sortBy(unionKeys);
 
-  const result = _.sortBy(unionKeys).map((key) => {
+  return sortKeys.map((key) => {
     if (!_.has(data1, key)) {
       return { key, type: 'added', value: data2[key] };
     }
@@ -21,10 +22,9 @@ const diffConstructor = (data1, data2) => {
         to: data2[key],
       };
     }
-    return { key, type: 'nested', children: diffConstructor(data1[key], data2[key]) };
+    const children = diffConstructor(data1[key], data2[key]);
+    return { key, type: 'nested', children };
   });
-
-  return result;
 };
 
 export default diffConstructor;
