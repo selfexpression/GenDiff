@@ -28,7 +28,6 @@ const stylish = (data) => {
   const iter = (currentValue, depth = 1) => {
     const indent = getIndent(depth);
     const bracketIndent = getBracketIndent(depth);
-
     const lines = Object
       .entries(currentValue)
       .map(([, value]) => {
@@ -50,7 +49,6 @@ const stylish = (data) => {
             throw new Error(`Unsupported node type (${value.type})!`);
         }
       });
-
     return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };
   return iter(data);
