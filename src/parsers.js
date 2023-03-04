@@ -9,7 +9,7 @@ const parse = (data, format) => {
     case '.yaml':
       return (yaml.load(data));
     default:
-      return null;
+      throw new Error(`Unsupported file extention (${format})! [Supported: .json, .yml, .yaml]`);
   }
 };
 

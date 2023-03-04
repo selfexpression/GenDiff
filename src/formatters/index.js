@@ -10,7 +10,7 @@ const format = (diff, formatName) => {
     case 'json':
       return JSON.stringify(diff);
     default:
-      return null;
+      throw new Error(`Unsupported format type (${formatName})! [Supported: stylish, plain, json]`);
   }
 };
 

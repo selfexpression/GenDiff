@@ -28,7 +28,7 @@ const plain = (data) => {
         case 'nested':
           return `${iter(value.children, path)}`;
         default:
-          return null;
+          throw new Error(`Unsupported node type (${value.type})!`);
       }
     });
     return output.filter((line) => line !== '').join('\n');
