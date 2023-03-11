@@ -1,24 +1,21 @@
+import _ from 'lodash';
 import { readFileSync } from 'fs';
-import { cwd } from 'process';
 import path from 'path';
 import diffConstructor from './diffConstructor.js';
-import parse from './parsers.js';
+import parseData from './parsers.js';
 import formatDiff from './formatters/index.js';
 
-const getRawData = (filepath) => {
-  const fullPath = path.resolve(cwd(), filepath);
-  return readFileSync(fullPath, 'utf-8');
+const getFormat = (filepath) => _.trim(path.extname(filepath), '.');
+
+const readFile = (filepath) => {
+  const fullPath = path.resolve(process.cwd(), filepath);
+  const data = readFileSync(fullPath, 'utf-8');
+  return parseData(data, getFormat(filepath));
 };
 
-const getExtention = (filepath) => path.extname(filepath);
-
 export default (filePath1, filePath2, formatName = 'stylish') => {
-  const fileExtension1 = getExtention(filePath1);
-  const fileExtension2 = getExtention(filePath2);
-  const data1 = getRawData(filePath1);
-  const data2 = getRawData(filePath2);
-  const dataParse1 = parse(data1, fileExtension1);
-  const dataParse2 = parse(data2, fileExtension2);
-  const result = diffConstructor(dataParse1, dataParse2);
+  const data1 = readFile(filePath1);
+  const data2 = readFile(filePath2);
+  const result = diffConstructor(data1, data2);
   return formatDiff(result, formatName);
 };
