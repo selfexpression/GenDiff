@@ -36,11 +36,11 @@ const stylish = (data) => {
           return `${indent}+ ${key}: ${stringify(value, depth + 1)}`;
         case 'nested':
           return `${indent}  ${key}: ${iter(value, depth + 1)}`;
-        case 'deleted':
+        case 'removed':
           return `${indent}- ${key}: ${stringify(value, depth + 1)}`;
         case 'unchanged':
           return `${indent}  ${key}: ${stringify(value, depth + 1)}`;
-        case 'changed':
+        case 'updated':
           return [
             `${indent}- ${key}: ${stringify(value1, depth + 1)}`,
             `${indent}+ ${key}: ${stringify(value2, depth + 1)}`,

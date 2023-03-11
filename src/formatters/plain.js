@@ -20,10 +20,10 @@ const plain = (data) => {
       switch (type) {
         case 'added':
           return `Property '${newPath}' was added with value: ${correctValue(value)}`;
-        case 'deleted':
-          return `Property '${newPath}' was deleted`;
-        case 'changed':
-          return `Property '${newPath}' was changed. From ${correctValue(value1)} to ${correctValue(value2)}`;
+        case 'removed':
+          return `Property '${newPath}' was removed`;
+        case 'updated':
+          return `Property '${newPath}' was updated. From ${correctValue(value1)} to ${correctValue(value2)}`;
         case 'unchanged':
           return '';
         case 'nested':
